@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ella Anderson — Developer & Creator</title>
+
+  <!-- Fonts: Playfair Display for editorial flair, DM Sans for clean body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- if you're reading this source code: hi. I appreciate the due diligence. -->
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Decorative blurred paint splatters behind everything -->
+  <div class="splatter splatter--coral"></div>
+  <div class="splatter splatter--sky"></div>
+  <div class="splatter splatter--marigold"></div>
+  <div class="splatter splatter--sage"></div>
+  <div class="splatter splatter--lavender"></div>
+  <div class="splatter splatter--blush"></div>
+
+
+  <!-- ── NAV ─────────────────────────────────────────────────────────── -->
+  <nav>
+    <a href="#" class="nav-logo">ella anderson</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <div class="page-wrapper">
+
+    <!-- ── HERO ───────────────────────────────────────────────────────── -->
+    <section class="hero">
+      <p class="hero-eyebrow">
+        <span>//</span> developer <span>&amp;</span> creator
+      </p>
+
+      <h1 class="hero-title">
+        I build things<br />that <em>think</em>.
+      </h1>
+
+      <p class="hero-sub">
+        CS student who designs programming languages
+        <span class="dash" style="background: var(--sky)"></span>
+        web experiences
+        <span class="dash" style="background: var(--sage)"></span>
+        and the occasional existential crisis.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn--primary">View My Work ↓</a>
+        <a href="#contact" class="btn btn--ghost">Get In Touch</a>
+      </div>
+
+      <p class="aside hero-aside">
+        // yes, I wrote a whole programming language.<br>
+        // no, I will not be answering questions about my sleep schedule.
+      </p>
+
+      <!-- Playful paint-swatch bar -->
+      <div class="color-bar">
+        <span style="background: var(--coral)"></span>
+        <span style="background: var(--marigold)"></span>
+        <span style="background: var(--sky)"></span>
+        <span style="background: var(--sage)"></span>
+        <span style="background: var(--lavender)"></span>
+        <span style="background: var(--blush)"></span>
+      </div>
+    </section>
+
+
+    <!-- ── PROJECTS ──────────────────────────────────────────────────── -->
+    <section class="projects" id="projects">
+      <div class="section-header reveal">
+        <p class="section-label" style="color: var(--coral)">// 01</p>
+        <h2 class="section-title">Selected Work</h2>
+      </div>
+
+      <!-- PROJECT: Dirt Programming Language -->
+      <div class="project-card reveal">
+        <div class="project-visual">
+          <div class="project-screen">
+            <div class="screen-bar">
+              <span class="screen-dot" style="background: #e8634a"></span>
+              <span class="screen-dot" style="background: #f2a93b"></span>
+              <span class="screen-dot" style="background: #5db87e"></span>
+              <span class="screen-title">pong.dirt</span>
+            </div>
+            <div class="screen-body">
+              <span class="tok-cmt">// pong, but make it artisanal</span><br />
+              <span class="tok-kw">let</span> <span class="tok-op">paddleY</span> = <span class="tok-num">150</span>;<br />
+              <span class="tok-kw">let</span> <span class="tok-op">ballX</span> = <span class="tok-num">320</span>;<br />
+              <span class="tok-kw">let</span> <span class="tok-op">ballY</span> = <span class="tok-num">180</span>;<br />
+              <span class="tok-kw">let</span> <span class="tok-op">dx</span> = <span class="tok-num">3</span>;<br /><br />
+              <span class="tok-kw">fn</span> <span class="tok-fn">update</span>() {<br />
+              &nbsp;&nbsp;<span class="tok-fn">clear</span>();<br />
+              &nbsp;&nbsp;<span class="tok-fn">fillColor</span>(<span class="tok-str">"#22c55e"</span>);<br />
+              &nbsp;&nbsp;<span class="tok-fn">rect</span>(<span class="tok-num">20</span>, paddleY, <span class="tok-num">12</span>, <span class="tok-num">60</span>);<br />
+              &nbsp;&nbsp;<span class="tok-fn">circle</span>(ballX, ballY, <span class="tok-num">8</span>);<br />
+              }<br /><br />
+              <span class="tok-fn">onUpdate</span>(update);<span class="tok-cursor"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-info">
+          <div class="project-number">01</div>
+          <h3 class="project-name">Dirt Programming Language</h3>
+          <p class="project-desc">
+            A custom programming language and browser-based IDE built from scratch.
+            Hand-written lexer, parser, and tree-walk interpreter in TypeScript
+            with a canvas graphics API for building games — zero external parsing libraries.
+          </p>
+          <p class="aside project-aside">
+            // zero external parsing libraries were harmed in the making of this project.
+            also zero sleep was had.
+          </p>
+          <div class="project-tags">
+            <span class="tag tag--lavender">TypeScript</span>
+            <span class="tag tag--sky">Language Design</span>
+            <span class="tag tag--sage">Interpreters</span>
+            <span class="tag tag--marigold">CodeMirror 6</span>
+            <span class="tag tag--coral">Canvas API</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="btn btn--primary" target="_blank">Live Demo →</a>
+            <a href="#" class="btn btn--ghost" target="_blank">Source Code</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 02 — Coming Soon -->
+      <div class="project-card reveal">
+        <div class="project-visual project-visual--placeholder">
+          <div class="placeholder-content">
+            <p class="placeholder-title">Coming soon</p>
+            <p class="placeholder-sub">
+              // currently brewing something<br>// probably involving too much caffeine
+            </p>
+          </div>
+        </div>
+        <div class="project-info">
+          <div class="project-number project-number--dim">02</div>
+          <h3 class="project-name project-name--dim">Project Two</h3>
+          <p class="project-desc project-desc--dim">
+            Something exciting is in the works. Check back later, or better yet,
+            hire me and I'll build it for you.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── ABOUT ──────────────────────────────────────────────────────── -->
+    <section class="about" id="about">
+      <div class="section-header reveal">
+        <p class="section-label" style="color: var(--sky)">// 02</p>
+        <h2 class="section-title">About Me</h2>
+      </div>
+
+      <div class="about-grid reveal">
+        <div class="about-portrait">
+          <span class="about-initials">EA</span>
+          <span class="about-portrait-hint">← your photo here</span>
+        </div>
+
+        <div class="about-text">
+          <p>
+            I'm a computer science student who loves building things from the ground up
+            — especially the tools that other people build things with.
+          </p>
+          <p>
+            My latest project is Dirt, a custom programming language with its own
+            lexer, parser, interpreter, and browser IDE. I believe the best way
+            to understand how software works is to build it yourself, from scratch,
+            with no shortcuts and an unreasonable number of late nights.
+          </p>
+          <p class="aside">
+            // I once spent 4 hours debugging a single semicolon.<br>
+            // I emerged stronger. and more paranoid.
+          </p>
+          <p>
+            When I'm not writing code, I'm probably sketching, exploring new music,
+            or staring at a terminal wondering why something that "should definitely work"
+            does not, in fact, work.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── SKILLS MARQUEE ────────────────────────────────────────────── -->
+    <section id="skills">
+      <div class="marquee-wrap">
+        <div class="marquee">
+          <span class="marquee-item" style="border-color: var(--coral); color: var(--coral)">TypeScript</span>
+          <span class="marquee-item" style="border-color: var(--sky); color: var(--sky)">Language Design</span>
+          <span class="marquee-item" style="border-color: var(--sage); color: var(--sage)">Node.js</span>
+          <span class="marquee-item" style="border-color: var(--lavender); color: var(--lavender)">Interpreters</span>
+          <span class="marquee-item" style="border-color: var(--marigold); color: var(--marigold)">Vite</span>
+          <span class="marquee-item" style="border-color: var(--blush); color: var(--blush)">CodeMirror 6</span>
+          <span class="marquee-item" style="border-color: var(--coral); color: var(--coral)">Express</span>
+          <span class="marquee-item" style="border-color: var(--sky); color: var(--sky)">SQLite</span>
+          <span class="marquee-item" style="border-color: var(--sage); color: var(--sage)">Canvas API</span>
+          <span class="marquee-item" style="border-color: var(--lavender); color: var(--lavender)">CSS / SVG</span>
+          <span class="marquee-item" style="border-color: var(--marigold); color: var(--marigold)">Git</span>
+          <span class="marquee-item" style="border-color: var(--blush); color: var(--blush)">Googling Things</span>
+          <span class="marquee-item" style="border-color: var(--coral); color: var(--coral)">HTML</span>
+          <span class="marquee-item" style="border-color: var(--sage); color: var(--sage)">Debugging at 2 AM</span>
+          <!-- Duplicate set for seamless infinite scroll -->
+          <span class="marquee-item" style="border-color: var(--coral); color: var(--coral)">TypeScript</span>
+          <span class="marquee-item" style="border-color: var(--sky); color: var(--sky)">Language Design</span>
+          <span class="marquee-item" style="border-color: var(--sage); color: var(--sage)">Node.js</span>
+          <span class="marquee-item" style="border-color: var(--lavender); color: var(--lavender)">Interpreters</span>
+          <span class="marquee-item" style="border-color: var(--marigold); color: var(--marigold)">Vite</span>
+          <span class="marquee-item" style="border-color: var(--blush); color: var(--blush)">CodeMirror 6</span>
+          <span class="marquee-item" style="border-color: var(--coral); color: var(--coral)">Express</span>
+          <span class="marquee-item" style="border-color: var(--sky); color: var(--sky)">SQLite</span>
+          <span class="marquee-item" style="border-color: var(--sage); color: var(--sage)">Canvas API</span>
+          <span class="marquee-item" style="border-color: var(--lavender); color: var(--lavender)">CSS / SVG</span>
+          <span class="marquee-item" style="border-color: var(--marigold); color: var(--marigold)">Git</span>
+          <span class="marquee-item" style="border-color: var(--blush); color: var(--blush)">Googling Things</span>
+          <span class="marquee-item" style="border-color: var(--coral); color: var(--coral)">HTML</span>
+          <span class="marquee-item" style="border-color: var(--sage); color: var(--sage)">Debugging at 2 AM</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── CONTACT ───────────────────────────────────────────────────── -->
+    <section class="contact" id="contact">
+      <div class="reveal">
+        <p class="section-label" style="color: var(--sage)">// 03</p>
+        <h2 class="contact-title">Let's connect.</h2>
+        <p class="contact-sub">
+          Open to internships, collaborations, and conversations about
+          why semicolons are the hill I'll die on.
+        </p>
+        <p class="aside contact-aside">
+          // response time: faster than my code compiles. usually.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:your@email.com" class="btn btn--primary">Email Me</a>
+          <a href="https://github.com/" class="btn btn--ghost" target="_blank">GitHub</a>
+          <a href="https://linkedin.com/" class="btn btn--ghost" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── FOOTER ────────────────────────────────────────────────────── -->
+    <footer>
+      <div class="color-bar">
+        <span style="background: var(--coral); width: 20px; height: 4px;"></span>
+        <span style="background: var(--marigold); width: 20px; height: 4px;"></span>
+        <span style="background: var(--sky); width: 20px; height: 4px;"></span>
+        <span style="background: var(--sage); width: 20px; height: 4px;"></span>
+        <span style="background: var(--lavender); width: 20px; height: 4px;"></span>
+        <span style="background: var(--blush); width: 20px; height: 4px;"></span>
+      </div>
+      <p>Built with care (and caffeine) by Ella Anderson · 2025</p>
+      <p class="snark">// no templates were used. yes, really. you can check.</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
