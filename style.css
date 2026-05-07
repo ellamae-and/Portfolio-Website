@@ -1,0 +1,643 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   ELLA ANDERSON — PORTFOLIO STYLESHEET
+   Sections:
+     1. Design tokens (CSS variables)
+     2. Reset + base
+     3. Noise texture overlay
+     4. Paint splatters
+     5. Layout
+     6. Nav
+     7. Hero
+     8. Buttons
+     9. Color bar
+    10. Section headers
+    11. Projects
+    12. About
+    13. Skills marquee
+    14. Contact
+    15. Footer
+    16. Animations + scroll reveal
+    17. Responsive
+   ═══════════════════════════════════════════════════════════════════════ */
+
+
+/* ── 1. DESIGN TOKENS ────────────────────────────────────────────────── */
+
+:root {
+    /* Core palette — warm cream base with bold accent splashes */
+    --cream:     #faf6f0;
+    --ink:       #1a1a2e;
+    --ink-soft:  #3d3d56;
+    --ink-muted: #8888a0;
+  
+    /* Paint palette — each color is a "paint splatter" accent */
+    --coral:     #e8634a;
+    --marigold:  #f2a93b;
+    --sky:       #4a90d9;
+    --sage:      #5db87e;
+    --lavender:  #9b72cf;
+    --blush:     #e87fa0;
+  
+    /* Typography */
+    --font-display: "Playfair Display", Georgia, serif;
+    --font-body:    "DM Sans", system-ui, sans-serif;
+    --font-mono:    "JetBrains Mono", monospace;
+  
+    /* Spacing scale */
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 32px;
+    --space-lg: 64px;
+    --space-xl: 120px;
+  }
+  
+  
+  /* ── 2. RESET + BASE ─────────────────────────────────────────────────── */
+  
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--ink-muted) transparent;
+  }
+  
+  body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--lavender); color: white; }
+  
+  
+  /* ── 3. NOISE TEXTURE — subtle paper grain across the entire page ──── */
+  
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+  
+  
+  /* ── 4. PAINT SPLATTERS — decorative blobs behind the content ──────── */
+  
+  .splatter {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  /* Each splatter gets a unique color, size, and position */
+  .splatter--coral    { background: var(--coral);    width: 500px; height: 500px; top: -80px;  right: -120px; }
+  .splatter--sky      { background: var(--sky);      width: 600px; height: 600px; top: 300px;  left: -200px;  }
+  .splatter--marigold { background: var(--marigold); width: 450px; height: 450px; top: 900px;  right: -100px; }
+  .splatter--sage     { background: var(--sage);     width: 550px; height: 550px; top: 1500px; left: -150px;  }
+  .splatter--lavender { background: var(--lavender); width: 400px; height: 400px; top: 2200px; right: -80px;  }
+  .splatter--blush    { background: var(--blush);    width: 500px; height: 500px; top: 2800px; left: -100px;  }
+  
+  
+  /* ── 5. LAYOUT ───────────────────────────────────────────────────────── */
+  
+  .page-wrapper {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+  
+  section { position: relative; z-index: 1; }
+  
+  
+  /* ── 6. NAV ──────────────────────────────────────────────────────────── */
+  
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(16px);
+    background: rgba(250, 246, 240, 0.8);
+    border-bottom: 1px solid rgba(26, 26, 46, 0.06);
+  }
+  
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 900;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  
+  /* Colorful dot before the name — like a paint dab */
+  .nav-logo::before {
+    content: "";
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--coral);
+    margin-right: 8px;
+    vertical-align: middle;
+    animation: dotPulse 3s ease-in-out infinite;
+  }
+  
+  @keyframes dotPulse {
+    0%, 100% { background: var(--coral);    transform: scale(1);    }
+    25%      { background: var(--sky);      transform: scale(1.2);  }
+    50%      { background: var(--sage);     transform: scale(1);    }
+    75%      { background: var(--lavender); transform: scale(1.15); }
+  }
+  
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  
+  .nav-links a {
+    font-size: 14px; font-weight: 500;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+    position: relative;
+  }
+  
+  /* Colored underline on hover — different color for each link */
+  .nav-links a::after {
+    content: "";
+    position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 2px; border-radius: 1px;
+    transition: width 0.25s ease;
+  }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a:hover { color: var(--ink); }
+  
+  .nav-links li:nth-child(1) a::after { background: var(--coral); }
+  .nav-links li:nth-child(2) a::after { background: var(--sky); }
+  .nav-links li:nth-child(3) a::after { background: var(--sage); }
+  .nav-links li:nth-child(4) a::after { background: var(--lavender); }
+  
+  
+  /* ── 7. HERO ─────────────────────────────────────────────────────────── */
+  
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: var(--space-xl) 0;
+  }
+  
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: var(--space-sm);
+    animation: fadeSlideUp 0.8s ease-out 0.2s both;
+  }
+  
+  /* Color-cycle the slashes in the eyebrow */
+  .hero-eyebrow span {
+    display: inline-block;
+    animation: colorCycle 6s ease-in-out infinite;
+  }
+  
+  @keyframes colorCycle {
+    0%, 100% { color: var(--coral); }
+    25%      { color: var(--sky); }
+    50%      { color: var(--sage); }
+    75%      { color: var(--lavender); }
+  }
+  
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 8vw, 110px);
+    font-weight: 900; line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: var(--space-md);
+    animation: fadeSlideUp 0.8s ease-out 0.4s both;
+  }
+  
+  /* Italicized word with a color accent */
+  .hero-title em {
+    font-style: italic;
+    color: var(--coral);
+    position: relative;
+  }
+  
+  /* Hand-drawn underline beneath the italic word */
+  .hero-title em::after {
+    content: "";
+    position: absolute;
+    bottom: 2px; left: -4px; right: -4px;
+    height: 8px;
+    background: var(--marigold);
+    opacity: 0.25; border-radius: 4px;
+    z-index: -1; transform: rotate(-1deg);
+  }
+  
+  .hero-sub {
+    font-size: clamp(18px, 2.5vw, 24px);
+    color: var(--ink-soft);
+    max-width: 580px; line-height: 1.7;
+    animation: fadeSlideUp 0.8s ease-out 0.6s both;
+  }
+  
+  .hero-sub strong { color: var(--ink); font-weight: 700; }
+  
+  /* Colored dashes between phrases in the subtitle */
+  .hero-sub .dash {
+    display: inline-block;
+    width: 20px; height: 3px;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin: 0 6px;
+  }
+  
+  .hero-cta {
+    margin-top: var(--space-lg);
+    display: flex; gap: 16px;
+    animation: fadeSlideUp 0.8s ease-out 0.8s both;
+  }
+  
+  /* Mono-font aside — used for dry humor throughout the page */
+  .aside {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-muted);
+    line-height: 1.7;
+  }
+  
+  .hero-aside {
+    margin-top: var(--space-lg);
+    animation: fadeSlideUp 0.8s ease-out 1s both;
+  }
+  
+  
+  /* ── 8. BUTTONS ──────────────────────────────────────────────────────── */
+  
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 28px; border-radius: 50px;
+    font-family: var(--font-body);
+    font-size: 15px; font-weight: 600;
+    text-decoration: none; cursor: pointer; border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn:hover  { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0); }
+  
+  .btn--primary {
+    background: var(--ink); color: var(--cream);
+    box-shadow: 0 4px 24px rgba(26, 26, 46, 0.15);
+  }
+  .btn--primary:hover { box-shadow: 0 8px 32px rgba(26, 26, 46, 0.25); }
+  
+  .btn--ghost {
+    background: transparent; color: var(--ink);
+    border: 1.5px solid var(--ink);
+  }
+  .btn--ghost:hover { background: var(--ink); color: var(--cream); }
+  
+  
+  /* ── 9. COLOR BAR — playful horizontal stripe of paint swatches ────── */
+  
+  .color-bar {
+    display: flex; gap: 6px;
+    margin-top: var(--space-lg);
+    animation: fadeSlideUp 0.8s ease-out 1.2s both;
+  }
+  
+  .color-bar span {
+    width: 32px; height: 8px;
+    border-radius: 4px;
+    transition: transform 0.2s, width 0.3s;
+  }
+  .color-bar span:hover { transform: scaleY(2.5); width: 48px; }
+  
+  
+  /* ── 10. SECTION HEADERS ─────────────────────────────────────────────── */
+  
+  .section-header { margin-bottom: var(--space-lg); }
+  
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: var(--space-xs);
+  }
+  
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900; line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  
+  
+  /* ── 11. PROJECTS ────────────────────────────────────────────────────── */
+  
+  .projects { padding: var(--space-xl) 0; }
+  
+  .project-card {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg); align-items: center;
+    padding: var(--space-lg) 0;
+    border-top: 1px solid rgba(26, 26, 46, 0.08);
+  }
+  .project-card:first-of-type { border-top: none; }
+  
+  /* Faux terminal window */
+  .project-visual {
+    position: relative; border-radius: 16px;
+    overflow: hidden; aspect-ratio: 16 / 10;
+    background: var(--ink);
+    box-shadow: 0 24px 80px rgba(26, 26, 46, 0.12);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .project-visual:hover {
+    transform: translateY(-4px) rotate(-0.5deg);
+    box-shadow: 0 32px 100px rgba(26, 26, 46, 0.18);
+  }
+  
+  /* Dimmed placeholder state for "coming soon" project */
+  .project-visual--placeholder {
+    opacity: 0.4;
+    display: flex; align-items: center; justify-content: center;
+  }
+  
+  .placeholder-content { text-align: center; padding: 40px; }
+  .placeholder-title {
+    font-family: var(--font-display);
+    font-size: 32px; font-weight: 900; font-style: italic;
+    color: rgba(255,255,255,0.5);
+  }
+  .placeholder-sub {
+    font-family: var(--font-mono); font-size: 12px;
+    color: rgba(255,255,255,0.3); margin-top: 12px;
+  }
+  
+  .project-screen { width: 100%; height: 100%; display: flex; flex-direction: column; }
+  
+  .screen-bar {
+    display: flex; align-items: center; gap: 6px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .screen-dot { width: 10px; height: 10px; border-radius: 50%; }
+  
+  .screen-title {
+    font-family: var(--font-mono); font-size: 11px;
+    color: rgba(255,255,255,0.35); margin-left: 8px;
+  }
+  
+  .screen-body {
+    flex: 1; padding: 20px;
+    font-family: var(--font-mono);
+    font-size: 13px; line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    overflow: hidden;
+  }
+  
+  /* Syntax-colored tokens in the faux IDE */
+  .tok-kw  { color: #a78bfa; }  /* keywords — purple */
+  .tok-fn  { color: #22c55e; }  /* function names — green */
+  .tok-str { color: #38bdf8; }  /* strings — blue */
+  .tok-num { color: #f59e0b; }  /* numbers — amber */
+  .tok-cmt { color: #4f647c; font-style: italic; }  /* comments */
+  .tok-op  { color: #e8ecf4; }  /* operators / variables */
+  
+  /* Blinking cursor in the terminal */
+  .tok-cursor {
+    display: inline-block; width: 8px; height: 15px;
+    background: #22c55e; vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  
+  .project-info { padding: var(--space-md) 0; }
+  
+  .project-number {
+    font-family: var(--font-display);
+    font-size: 80px; font-weight: 900; line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--ink-muted);
+    opacity: 0.25;
+    margin-bottom: var(--space-sm);
+  }
+  .project-number--dim { opacity: 0.12; }
+  
+  .project-name {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 900; line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-sm);
+  }
+  .project-name--dim { color: var(--ink-muted); }
+  
+  .project-desc {
+    font-size: 17px; color: var(--ink-soft);
+    line-height: 1.75; margin-bottom: 12px;
+    max-width: 480px;
+  }
+  .project-desc--dim { color: var(--ink-muted); }
+  
+  .project-aside { margin-bottom: var(--space-md); max-width: 460px; }
+  
+  .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--space-md); }
+  
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 11.5px; font-weight: 600;
+    padding: 5px 12px; border-radius: 50px;
+    letter-spacing: 0.03em;
+  }
+  
+  .tag--coral    { background: rgba(232, 99, 74, 0.12);  color: var(--coral); }
+  .tag--sky      { background: rgba(74, 144, 217, 0.12); color: var(--sky); }
+  .tag--sage     { background: rgba(93, 184, 126, 0.12); color: var(--sage); }
+  .tag--lavender { background: rgba(155, 114, 207, 0.12); color: var(--lavender); }
+  .tag--marigold { background: rgba(242, 169, 59, 0.12); color: var(--marigold); }
+  
+  .project-links { display: flex; gap: 12px; }
+  .project-links .btn { padding: 10px 20px; font-size: 13px; }
+  
+  
+  /* ── 12. ABOUT ───────────────────────────────────────────────────────── */
+  
+  .about { padding: var(--space-xl) 0; }
+  
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: var(--space-lg); align-items: start;
+  }
+  
+  .about-portrait {
+    position: relative; border-radius: 16px;
+    overflow: hidden; aspect-ratio: 3 / 4;
+    background: linear-gradient(135deg, var(--sky), var(--lavender), var(--coral));
+    display: flex; align-items: center; justify-content: center;
+  }
+  
+  .about-initials {
+    font-family: var(--font-display);
+    font-size: 120px; font-weight: 900;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: -0.05em;
+  }
+  
+  /* Replace-me hint on the portrait placeholder */
+  .about-portrait-hint {
+    position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+    font-family: var(--font-mono); font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    background: rgba(0,0,0,0.2); padding: 3px 10px; border-radius: 50px;
+    white-space: nowrap;
+  }
+  
+  .about-text { padding-top: var(--space-md); }
+  
+  .about-text p {
+    font-size: 18px; color: var(--ink-soft);
+    line-height: 1.8; margin-bottom: var(--space-md);
+    max-width: 560px;
+  }
+  
+  .about-text p:first-of-type {
+    font-size: 22px; color: var(--ink);
+    font-weight: 500; line-height: 1.6;
+  }
+  
+  .about-text .aside { margin-top: -12px; }
+  
+  
+  /* ── 13. SKILLS MARQUEE — infinite horizontal scroll of colored pills ─ */
+  
+  .marquee-wrap {
+    overflow: hidden;
+    padding: var(--space-lg) 0;
+    border-top: 1px solid rgba(26, 26, 46, 0.06);
+    border-bottom: 1px solid rgba(26, 26, 46, 0.06);
+  }
+  
+  .marquee {
+    display: flex; gap: 16px;
+    width: max-content;
+    animation: marqueeScroll 30s linear infinite;
+  }
+  
+  @keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  
+  .marquee-item {
+    font-family: var(--font-mono);
+    font-size: 14px; font-weight: 600;
+    padding: 10px 24px; border-radius: 50px;
+    white-space: nowrap; border: 1.5px solid;
+    transition: transform 0.2s;
+  }
+  .marquee-item:hover { transform: scale(1.08); }
+  
+  
+  /* ── 14. CONTACT ─────────────────────────────────────────────────────── */
+  
+  .contact {
+    padding: var(--space-xl) 0;
+    text-align: center;
+  }
+  
+  .contact-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 900; line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-sm);
+  }
+  
+  .contact-sub {
+    font-size: 18px; color: var(--ink-soft);
+    margin-bottom: 12px; max-width: 520px; margin-inline: auto;
+  }
+  
+  .contact-aside { margin-bottom: var(--space-lg); }
+  
+  .contact-links {
+    display: flex; justify-content: center;
+    gap: 16px; flex-wrap: wrap;
+  }
+  .contact-links .btn { font-size: 14px; }
+  
+  
+  /* ── 15. FOOTER ──────────────────────────────────────────────────────── */
+  
+  footer {
+    padding: var(--space-lg) 0 var(--space-md);
+    text-align: center;
+    font-size: 13px; color: var(--ink-muted);
+    border-top: 1px solid rgba(26, 26, 46, 0.06);
+  }
+  
+  footer .color-bar {
+    justify-content: center;
+    margin-bottom: var(--space-sm);
+    margin-top: 0;
+  }
+  
+  footer .snark {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--ink-muted); margin-top: 8px; opacity: 0.5;
+  }
+  
+  
+  /* ── 16. ANIMATIONS + SCROLL REVEAL ──────────────────────────────────── */
+  
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Elements with .reveal start hidden and fade in when .is-visible is added */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  
+  
+  /* ── 17. RESPONSIVE ──────────────────────────────────────────────────── */
+  
+  @media (max-width: 768px) {
+    .project-card   { grid-template-columns: 1fr; gap: var(--space-md); }
+    .about-grid     { grid-template-columns: 1fr; }
+    .nav-links      { gap: 20px; }
+    .hero-cta       { flex-direction: column; align-items: flex-start; }
+    .about-portrait { max-width: 280px; }
+  }
+  
+  @media (max-width: 480px) {
+    .nav-links     { display: none; }
+    .page-wrapper  { padding: 0 20px; }
+  }
+  
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
